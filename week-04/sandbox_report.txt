@@ -1,0 +1,10 @@
+==================================================
+SESSION 10: SANDBOX DETONATION REPORT
+Operator: dwayne
+==================================================
+
+QUESTION 1: Did the ping to google.com succeed or fail in Host-Only mode?
+ANSWER: The ping to google.com FAILED. The terminal returned "Network is unreachable" confirming the VM is fully air-gapped and cannot send or receive traffic from the internet.
+
+QUESTION 2: Why must a SOC analyst NEVER use "Bridged" mode when detonating unknown malware?
+ANSWER: A SOC analyst must never use Bridged mode because it places the VM on the same network as all other devices in the home or office. If malware is detonated in Bridged mode it can spread to printers, laptops, and other machines on that network causing a live infection outside the sandbox.

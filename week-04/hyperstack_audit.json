@@ -1,0 +1,8 @@
+{
+  "operator": "DS",
+  "host_ip": "10.0.2.15",
+  "vm_sandbox_ip": "192.168.56.1",
+  "web_container_id": "b91e8dfd4660",
+  "isolation_test": "PASSED",
+  "persistence_verified": true
+}
