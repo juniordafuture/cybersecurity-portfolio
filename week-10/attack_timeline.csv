@@ -1,0 +1,4 @@
+Timestamp,Source IP,Event Type,Action,Description
+2026-05-28T02:15:00Z,185.220.101.45,Web Shell,Initial Access,Attacker executed whoami via web shell on web server 10.0.1.5
+2026-05-28T02:18:00Z,10.0.1.5,Privilege Escalation,Lateral Movement,Domain Admin privileges granted to attacker account on 10.0.1.10
+2026-05-28T02:25:00Z,10.0.1.10,Outbound Transfer,Exfiltration,Anomalous outbound transfer of 4.7GB detected via firewall to 185.220.101.45

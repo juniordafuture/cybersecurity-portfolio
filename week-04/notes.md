@@ -1,34 +1,28 @@
-# Week 04 — Vulnerability Scanning
+# Week 04 Notes — Containers & Docker
 
-**Date:** February 2026
-**Program:** Knowledge House Cybersecurity Fellowship
+**Operator:** dwayne  
+**Program:** Knowledge House Cybersecurity Fellowship — Sprint 01  
+**Sessions:** S10 · S11 · S12 · TLAB-04
 
-## Summary
+---
 
-This session introduced automated vulnerability scanning as a method for
-identifying known weaknesses in target systems. Students used industry-standard
-scanning tools to enumerate vulnerabilities and interpret scan output in the
-context of a penetration testing engagement (Kennedy et al., 2011).
+## Key Concepts
 
-## Tools & Commands Used
+Week 04 introduced container technology as both a deployment platform and a forensic analysis environment. Docker enables operators to build isolated, reproducible application environments using layered images and defined networking, which supports both rapid deployment and controlled security testing (Turnbull, 2018). Session 10 established the sandbox configuration workflow, requiring the operator to document the container environment setup and forensic documentation procedure in sandbox_report.txt.
 
-- `nmap --script vuln` — Nmap vulnerability scripts
-- `searchsploit <keyword>` — search Exploit-DB locally
-- `msfconsole` — launch Metasploit Framework
-- `use auxiliary/scanner/` — Metasploit auxiliary scanning modules
-- `db_nmap` — run Nmap scans from within Metasploit
+Session 11 produced deploy_web.sh, an automation script containing the correct docker run command to launch a web container with port mapping and detached execution. Writing deployment logic to a version-controlled shell script enforces infrastructure-as-code practices and creates an auditable record of container configuration decisions (Kim et al., 2021).
 
-## Key Takeaways
+Session 12 and TLAB-04 introduced Docker Compose for multi-container orchestration. The docker-compose.yml artifact defined an air-gapped stack in which a WordPress front end was assigned to both a public and a private network, while the database container was restricted to the private network only. The hyperstack_audit.json artifact documented all six required fields confirming that network isolation was tested and the isolation result was recorded honestly as PASSED or FAILED.
 
-Vulnerability scanning bridges the gap between passive reconnaissance and
-active exploitation by identifying specific weaknesses that may be leveraged
-during an engagement. The Common Vulnerability Scoring System (CVSS) provides
-a standardized method for rating the severity of discovered vulnerabilities,
-allowing testers to prioritize findings by risk level. Scan results must
-always be validated manually to reduce false positives before reporting.
+## Tools Used
+
+- `docker run`, `docker ps`, `docker exec` — container lifecycle management
+- `docker-compose up -d` — multi-container stack orchestration
+- Docker `networks:` — network segmentation and isolation
+- Shell scripting (`#!/bin/bash`) — deployment automation
 
 ## References
 
-Kennedy, D., O'Gorman, J., Kearns, D., & Aharoni, M. (2011). *Metasploit: The penetration tester's guide*. No Starch Press.
+Kim, G., Humble, J., Debois, P., Willis, J., & Forsgren, N. (2021). *The DevOps handbook: How to create world-class agility, reliability, and security in technology organizations* (2nd ed.). IT Revolution Press.
 
-Knowledge House. (2026). *Cybersecurity fellowship program curriculum*. Knowledge House.
+Turnbull, J. (2018). *The Docker book: Containerization is the new virtualization* (v18.09). James Turnbull.

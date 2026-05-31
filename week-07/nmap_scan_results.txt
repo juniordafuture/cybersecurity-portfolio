@@ -1,0 +1,29 @@
+S20 NMAP SCAN RESULTS
+=====================
+
+TARGET ALPHA
+IP: 172.18.0.3
+Open Port: 80/tcp
+Service: http
+Version: Apache httpd 2.4.66 (Unix)
+
+TARGET BETA
+IP: 172.18.0.2
+Open Port: 80/tcp
+Service: http
+Version: nginx 1.29.8
+
+TARGET GAMMA
+IP: 172.19.0.2
+Open Port: 3306/tcp
+Service: mysql
+Version: MySQL 5.7.44
+
+=====================
+THEORY QUESTIONS
+
+Q1: Why does a version scan (-sV) require root/sudo privileges?
+A1: Version scanning requires root privileges because it uses raw packet techniques to probe services and read low-level network responses that standard user accounts are not permitted to access.
+
+Q2: What is the risk of running a service with an outdated version on an open port?
+A2: Running an outdated service version exposes the system to known vulnerabilities and exploits that have been publicly documented, allowing an attacker to gain unauthorized access or disrupt the service.

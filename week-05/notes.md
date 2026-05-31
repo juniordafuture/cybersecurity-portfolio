@@ -1,40 +1,28 @@
-# Week 05 — Metasploit Framework
+# Week 05 Notes — Active Directory & Identity Management
 
-**Date:** February 2026
-**Program:** Knowledge House Cybersecurity Fellowship
+**Operator:** dwayne  
+**Program:** Knowledge House Cybersecurity Fellowship — Sprint 01  
+**Sessions:** S13 · S14 · TLAB-05
 
-## Summary
+---
 
-This session provided hands-on experience with the Metasploit Framework,
-one of the most widely used penetration testing platforms in the industry.
-Students practiced identifying, selecting, and configuring exploits to
-compromise vulnerable target systems in a controlled lab environment
-(Kennedy et al., 2011).
+## Key Concepts
 
-## Tools & Commands Used
+Week 05 focused on Windows Active Directory (AD) as the identity and access management backbone of enterprise environments. Active Directory's hierarchical structure of domains, organizational units (OUs), and Group Policy Objects (GPOs) provides centralized control over authentication, authorization, and configuration enforcement across all domain-joined systems (Microsoft, 2023). Understanding AD is essential for both offensive and defensive practitioners, as it represents the primary target for lateral movement and privilege escalation in real-world intrusions.
 
-- `msfconsole` — launch Metasploit
-- `search <term>` — search for modules
-- `use <module>` — select a module
-- `show options` — display required configuration
-- `set RHOSTS <ip>` — set target IP
-- `set LHOST <ip>` — set listener IP
-- `set payload <payload>` — select payload
-- `exploit` / `run` — launch the exploit
-- `sessions -l` — list active sessions
-- `sessions -i <id>` — interact with a session
+Session 13 produced onboard_engineers.ps1, a PowerShell script that automated the creation of new user accounts in the Engineering OU using a for loop and the New-ADUser cmdlet. The script used the correct -Path parameter pointing to OU=Engineering,DC=titan,DC=local and set -ChangePasswordAtLogon $true, enforcing a credential reset on first login. Automating user provisioning reduces human error and creates a consistent, auditable onboarding process (Campbell, 2022).
 
-## Key Takeaways
+Session 14 and TLAB-05 examined Group Policy as a configuration enforcement mechanism. The gpo_audit.txt artifact documented the three required concepts: the gpupdate /force command used to immediately apply policy changes, the LSDOU processing order (Local, Site, Domain, OU) that determines which GPO wins in a conflict, and the rationale for scoping a Lockout Policy to the Engineering OU rather than the domain root.
 
-The Metasploit Framework streamlines the exploitation process by providing
-a structured interface to thousands of known exploits and payloads. Understanding
-the relationship between exploits, payloads, and listeners is fundamental to
-achieving reliable remote code execution during an engagement. Post-exploitation
-modules within Metasploit allow testers to escalate privileges, extract
-credentials, and maintain persistence after initial access is gained.
+## Tools Used
+
+- `New-ADUser` — PowerShell AD user provisioning
+- `gpupdate /force` — immediate Group Policy application
+- Group Policy Management Console (GPMC) — policy creation and linking
+- Active Directory Users and Computers (ADUC) — OU and user management
 
 ## References
 
-Kennedy, D., O'Gorman, J., Kearns, D., & Aharoni, M. (2011). *Metasploit: The penetration tester's guide*. No Starch Press.
+Campbell, D. (2022). *Mastering Active Directory: Design, deploy, and protect Active Directory Domain Services for Windows Server 2022* (3rd ed.). Packt Publishing.
 
-Knowledge House. (2026). *Cybersecurity fellowship program curriculum*. Knowledge House.
+Microsoft. (2023). *Active Directory Domain Services overview*. Microsoft Learn. https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview

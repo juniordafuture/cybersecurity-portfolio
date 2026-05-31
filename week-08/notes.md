@@ -1,37 +1,30 @@
-# Week 08 — Password Attacks & Credential Cracking
+# Week 08 Notes — Exploitation & Privilege Escalation
 
-**Date:** April 2026
-**Program:** Knowledge House Cybersecurity Fellowship
+**Operator:** dwayne  
+**Program:** Knowledge House Cybersecurity Fellowship — Sprint 01  
+**Sessions:** S22 · S23 · S24 · TLAB-08
 
-## Summary
+---
 
-This session covered credential-based attacks including brute force, dictionary
-attacks, and hash cracking techniques. Students practiced using industry-standard
-tools to crack password hashes and perform online authentication attacks against
-services in a controlled lab environment (Oriyano, 2016).
+## Key Concepts
 
-## Tools & Commands Used
+Week 08 moved from assessment into active exploitation, covering the full post-compromise lifecycle from initial access through lateral movement. The Metasploit Framework provides a structured environment for exploit development, payload delivery, and post-exploitation operations, and is the industry-standard tool for authorized penetration testing engagements (Kennedy et al., 2011). Session 22 produced exploit_verification.png, a screenshot confirming an active Meterpreter session with getuid output showing elevated access and sysinfo output identifying the target machine.
 
-- `hydra -l <user> -P <wordlist> <target> <service>` — online brute force
-- `hashcat -m <mode> <hashfile> <wordlist>` — GPU-accelerated hash cracking
-- `john <hashfile>` — John the Ripper hash cracking
-- `unshadow /etc/passwd /etc/shadow` — prepare Linux hashes for cracking
-- `rockyou.txt` — common password wordlist
-- `hash-identifier` — identify hash type
+Session 23 addressed post-exploitation privilege escalation on both Linux and Windows platforms. On Linux, GTFOBins was used to identify a SUID binary that could be abused to spawn a root shell. On Windows, WinPEAS enumerated a service with an unquoted executable path in a world-writable directory, and msfvenom generated a malicious service binary to replace it, achieving nt authority\system access. The escalation_path.txt artifact documented all four required fields: vulnerable service name, writable path, exact msfvenom command, and the confirming whoami output.
 
-## Key Takeaways
+Session 24 and TLAB-08 introduced pivoting and lateral movement through internal network segments. Metasploit's autoroute module established a routing table entry for the internal subnet, and proxychains tunneled an nmap scan through the active session to reach 10.0.9.50, discovering an open Redis port on the isolated segment. The Deep_Pivot_Report.md capstone documented all four phases of the operation chain from initial GTFOBins escalation through the confirmed internal network scan.
 
-Weak and reused passwords remain one of the most exploited vulnerabilities
-in real-world breaches, making credential attacks a high-value technique in
-penetration testing engagements. The RockYou wordlist demonstrates the
-effectiveness of dictionary attacks, as a large percentage of real-world
-passwords match commonly used patterns and phrases. Hash cracking speed is
-heavily dependent on the hashing algorithm used — modern algorithms such as
-bcrypt are intentionally slow to resist offline cracking, while legacy
-algorithms like MD5 are cracked almost instantly.
+## Tools Used
+
+- `msfconsole`, Metasploit modules — exploit delivery and session management
+- `meterpreter` — post-exploitation shell and command execution
+- GTFOBins — Linux SUID binary abuse for privilege escalation
+- `WinPEAS` — Windows privilege escalation enumeration
+- `msfvenom` — custom payload generation
+- `autoroute`, `proxychains`, `nmap` — network pivoting and internal scanning
 
 ## References
 
-Knowledge House. (2026). *Cybersecurity fellowship program curriculum*. Knowledge House.
+Kennedy, D., O'Gorman, J., Kearns, D., & Aharoni, M. (2011). *Metasploit: The penetration tester's guide*. No Starch Press.
 
-Oriyano, S. P. (2016). *CEH v9: Certified ethical hacker version 9 study guide*. Sybex.
+Walter, J. (2020). *Penetration testing: A hands-on introduction to hacking*. No Starch Press.
