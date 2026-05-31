@@ -1,0 +1,16 @@
+# Week 09 — Pivot Routes Artifact
+# Session: Network Pivoting Lab
+# Program: Knowledge House Cybersecurity Fellowship
+
+[*] Active routing table via Meterpreter session
+
+Subnet         Netmask        Gateway
+192.168.10.0   255.255.255.0  Session 1
+10.10.20.0     255.255.255.0  Session 1
+
+[*] SOCKS proxy started on 127.0.0.1:1080
+[*] Proxychains nmap scan initiated against 10.10.20.0/24
+[*] Discovered host: 10.10.20.15 (Windows Server — port 445 open)
+[*] Discovered host: 10.10.20.22 (Linux — port 22 open)
+
+[+] Pivot route established and internal subnet enumerated successfully.
